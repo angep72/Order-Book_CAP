@@ -1,0 +1,6 @@
+ID,name,description,stock,price,currency,category,supplier,rating,createdAt
+P1,Premium Laptop,"High-performance laptop with SSD",100,1299.99,USD,Electronics,TechCorp,4.5,2024-01-01T00:00:00Z
+P2,Wireless Mouse,"Ergonomic wireless mouse",200,29.99,USD,Electronics,TechCorp,4.2,2024-01-01T00:00:00Z
+P3,Coffee Maker,"Automatic drip coffee maker",50,79.99,USD,Appliances,HomeGoods,4.7,2024-01-01T00:00:00Z
+P4,Office Chair,"Adjustable mesh office chair",75,199.99,USD,Furniture,OfficePro,4.4,2024-01-01T00:00:00Z
+P5,Desk Lamp,"LED desk lamp with adjustable brightness",150,39.99,USD,Lighting,HomeGoods,4.1,2024-01-01T00:00:00Z
