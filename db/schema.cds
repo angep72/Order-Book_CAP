@@ -3,14 +3,14 @@ namespace sap.capire.products;
 
 entity Products {
   key ID          : String;
-      name        : String;
-      description : String;
-      stock       : Integer;
-      price       : Decimal;
-      currency    : String;
-      category    : String;
-      supplier    : String;
-      rating      : Decimal;
+      name        : String; @mandatory
+      description : String;@mandatory
+      stock       : Integer;@mandatory
+      price       : Decimal;@mandatory
+      currency    : String;@mandatory
+      category    : String;@mandatory
+      supplier    : String;@mandatory
+      rating      : Decimal;@mandatory
       createdAt   : Timestamp;
 }
 
