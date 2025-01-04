@@ -10,5 +10,4 @@ service CatalogService {
         status: String;
     };
         action cancelOrder(ID: UUID) returns String;
-
 }
