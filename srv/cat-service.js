@@ -65,5 +65,65 @@ module.exports = cds.service.impl(async function() {
             await tx.rollback()
             return req.error(500, `Order submission failed: ${error.message}`)
         }
+    }),
+    this.on('cancelOrder', async req => {
+        const { order_ID } = req.data
+
+        // Start a transaction
+        const tx = cds.transaction(req)
+
+        // Fetch the order from the database
+        const order = await tx.read(Orders).where({ ID: order_ID })
+
+        // Validate order existence
+        if (!order || order.length === 0) {
+            return req.error(404, `Order ${order_ID} not found`)
+        }
+
+        // Check order status
+        if (order[0].status !== 'Created') {
+            return req.error(400, `Order ${order_ID} cannot be cancelled`)
+        }
+
+        // Fetch the product from the database
+        const product = await tx.read(Products).where({ ID: order[0].product_ID })
+
+        // Validate product existence
+        if (!product || product.length === 0) {
+            return req.error(404, `Product ${order[0].product_ID} not found`)
+        }
+
+        const currentStock = product[0].stock
+        const quantity = order[0].quantity
+        const newStock = currentStock + quantity
+
+        try {
+            // Update the order status to 'Cancelled'
+            await tx.run(
+                UPDATE(Orders)
+                    .set({ status: 'Cancelled' })
+                    .where({ ID: order_ID })
+            )
+
+            // Update the product stock after cancelling the order
+            await tx.run(
+                UPDATE(Products)
+                    .set({ stock: newStock })  // Increase the stock
+                    .where({ ID: order[0].product_ID })  // Update the stock of the ordered product
+            )
+
+            // Commit the transaction
+            await tx.commit()
+
+            // Return order cancellation confirmation
+            return {
+                orderID: order_ID,
+                status: 'Cancelled'
+            }
+        } catch (error) {
+            // Rollback transaction in case of an error
+            await tx.rollback()
+            return req.error(500, `Order cancellation failed: ${error.message}`)
+        }
     })
 })
