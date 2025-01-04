@@ -9,4 +9,6 @@ service CatalogService {
         orderID: String;
         status: String;
     };
+        action cancelOrder(ID: UUID) returns String;
+
 }
