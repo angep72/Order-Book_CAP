@@ -8,7 +8,7 @@ module.exports = cds.service.impl(async function() {
     this.on('submitOrder', async req => {
         const { product_ID, quantity } = req.data
         
-        // Start a transaction
+        // Start a transaction.
         const tx = cds.transaction(req)
 
         // Fetch the product from the database (actual Products entity)
