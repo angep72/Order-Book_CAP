@@ -2,7 +2,7 @@
 namespace sap.capire.products;
 
 entity Products {
-  key ID          : String;
+  key ID          : String;@assert.unique
       name        : String; @mandatory
       description : String;@mandatory
       stock       : Integer;@mandatory
