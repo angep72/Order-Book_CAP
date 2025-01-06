@@ -58,7 +58,7 @@ module.exports = cds.service.impl(async function() {
             // Return order confirmation
             return {
                 orderID: orderID,
-                status: 'Success'
+                status: 'Success..'
             }
         } catch (error) {
             // Rollback transaction in case of an error
