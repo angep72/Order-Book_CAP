@@ -5,8 +5,8 @@ module.exports = cds.service.impl(async function() {
     const { Products, Orders } = this.entities
 
     // Implement the submitOrder action
-    this.on('submitOrder', async req => {
-        const { product_ID, quantity } = req.data
+    this.after('submitOrder', async req => {
+        const { product_ID, quantity,customer,totalamount } = req.data
         
         // Start a transaction.
         const tx = cds.transaction(req)
@@ -37,7 +37,11 @@ module.exports = cds.service.impl(async function() {
                     ID: orderID,
                     product_ID: product_ID,
                     quantity: quantity,
-                    status: 'Created'
+                    status: 'Created',
+                    orderDate: new Date(),
+                    customer:customer,
+                    totalamount: totalamount
+
                 })
             )
 

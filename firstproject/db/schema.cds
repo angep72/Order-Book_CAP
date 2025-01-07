@@ -17,9 +17,9 @@ entity Products {
 entity Orders {
   key ID          : String;
       product_ID  : String;
-      quantity    : Integer;
+      quantity    : Integer;@mandatory
       status      : String;
       orderDate   : Timestamp;
-      customer    : String;
+      customer    : String;@mandatory
       totalAmount : Decimal;
 }
