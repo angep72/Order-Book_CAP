@@ -15,7 +15,7 @@ entity Products {
 }
 
 entity Orders {
-  key ID          : String;
+  key ID          : String;@mandatory
       product_ID  : String;
       quantity    : Integer;
       status      : String;
