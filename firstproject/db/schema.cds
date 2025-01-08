@@ -15,8 +15,8 @@ entity Products {
 }
 
 entity Orders {
-  key ID          : String;
-      product_ID  : String;
+  key ID          : String;@assert.unique
+      product_ID  : String;@assert.notNull
       quantity    : Integer;@mandatory
       status      : String;
       orderDate   : Timestamp;
