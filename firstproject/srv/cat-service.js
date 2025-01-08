@@ -5,7 +5,7 @@ module.exports = cds.service.impl(async function() {
     const { Products, Orders } = this.entities
 
     // Implement the submitOrder action
-    this.after('submitOrder', async req => {
+    this.on('submitOrder', async req => {
         const { product_ID, quantity,customer,totalamount } = req.data
         
         // Start a transaction.
@@ -60,16 +60,21 @@ module.exports = cds.service.impl(async function() {
             console.log('New Stock:', newStock);
             
             // Return order confirmation
-            return {
-                orderID: orderID,
-                status: 'Success...'
-            }
+            // return {
+            //     orderID: orderID,
+            //     status: 'Success...'
+            // }
         } catch (error) {
             // Rollback transaction in case of an error
             await tx.rollback()
             return req.error(500, `Order submission failed: ${error.message}`)
         }
+    }),
+    this.after('submitOrder', async (result, req) => {
+        console.log(result.status)
     })
+
+
     // this.on('cancelOrder', async req => {
     //     const { order_ID } = req.data
 
