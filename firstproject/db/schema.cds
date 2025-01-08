@@ -15,11 +15,11 @@ entity Products {
 }
 
 entity Orders {
-  key ID          : String;@assert.unique
-      product_ID  : String;@assert.notNull
-      quantity    : Integer;@mandatory
+  key ID          : String;
+      product_ID  : String;
+      quantity    : Integer;
       status      : String;
       orderDate   : Timestamp;
-      customer    : String;@mandatory
+      customer    : String;
       totalAmount : Decimal;
 }

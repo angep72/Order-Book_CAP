@@ -1,20 +1,15 @@
 const cds = require('@sap/cds')
 
 module.exports = cds.service.impl(async function() {
-    // Get the service entities (Products and Orders from the model)
     const { Products, Orders } = this.entities
 
-    // Implement the submitOrder action
     this.on('submitOrder', async req => {
         const { product_ID, quantity,customer,totalamount } = req.data
         
-        // Start a transaction.
         const tx = cds.transaction(req)
 
-        // Fetch the product from the database (actual Products entity)
         const product = await tx.read(Products).where({ ID: product_ID })
         
-        // Validate product existence
         if (!product || product.length === 0) {
             return req.error(404, `Product ${product_ID} not found`)
         }
@@ -70,6 +65,54 @@ module.exports = cds.service.impl(async function() {
             return req.error(500, `Order submission failed: ${error.message}`)
         }
     })
+    this.on('deleteOrder', async (req) => {
+        const { orderID } = req.data; // Get the orderID from the request data
+
+        const tx = cds.transaction(req); // Start the transaction
+
+        try {
+            // Fetch the order from the database (based on orderID)
+            const order = await tx.read(Orders).where({ ID: orderID });
+
+            // Validate order existence
+            if (!order || order.length === 0) {
+                return req.error(404, `Order ${orderID} not found`);
+            }
+
+            // Fetch the product related to the order
+            const product = await tx.read(Products).where({ ID: order[0].product_ID });
+
+            // Validate product existence
+            if (!product || product.length === 0) {
+                return req.error(404, `Product ${order[0].product_ID} not found`);
+            }
+
+            // Calculate the new stock by adding the quantity from the order back
+            const currentStock = product[0].stock;
+            const restoredStock = currentStock + order[0].quantity;
+
+            // Begin by deleting the order from the Orders entity
+            await tx.run(DELETE.from(Orders).where({ ID: orderID }));
+
+            // Update the product stock by restoring the quantity back to the product's stock
+            await tx.run(UPDATE(Products)
+                .set({ stock: restoredStock })
+                .where({ ID: product[0].ID })
+            );
+
+            // Commit the transaction
+            await tx.commit();
+
+            // Return confirmation of order deletion
+            return { orderID: orderID, status: 'Order deleted successfully and stock restored' };
+        } catch (error) {
+            // Rollback transaction in case of an error
+            await tx.rollback();
+            return req.error(500, `Order deletion failed: ${error.message}`);
+        }
+    
+    })
+    
 
     // this.on('cancelOrder', async req => {
     //     const { order_ID } = req.data
