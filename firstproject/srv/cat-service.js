@@ -6,7 +6,7 @@ module.exports = cds.service.impl(async function() {
 
     // Implement the submitOrder action
     this.on('submitOrder', async req => {
-        const { product_ID, quantity } = req.data
+        const { product_ID, quantity,customer,totalamount } = req.data
         
         // Start a transaction.
         const tx = cds.transaction(req)
@@ -37,7 +37,11 @@ module.exports = cds.service.impl(async function() {
                     ID: orderID,
                     product_ID: product_ID,
                     quantity: quantity,
-                    status: 'Created'
+                    status: 'Created',
+                    orderDate: new Date(),
+                    customer:customer,
+                    totalamount: totalamount
+
                 })
             )
 
@@ -66,6 +70,7 @@ module.exports = cds.service.impl(async function() {
             return req.error(500, `Order submission failed: ${error.message}`)
         }
     })
+
     // this.on('cancelOrder', async req => {
     //     const { order_ID } = req.data
 

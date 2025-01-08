@@ -5,7 +5,7 @@ service CatalogService {
     entity Orders as projection on my.Orders;
 
     // Action definition
-    action submitOrder(product_ID: String, quantity: Integer) returns {
+    action submitOrder(product_ID: String, quantity: Integer, customer:String ) returns {
         orderID: String;
         status: String;
     };
