@@ -61,11 +61,13 @@ module.exports = async (srv) => {
   srv.on('bookAppointment', async (req) => {
     try {
       // Fields that should not be null or undefined
-      const requiredFields = ['patientId', 'dateTime', 'reason'];
-      validateFields(requiredFields, req);
 
       const { patientId, dateTime, reason } = req.data;
-
+      const bookedTime = await cds.transaction(req).run(SELECT.one.from(Appointments).where({dateTime}))
+    if(bookedTime){
+      req.error(400, 'Time slot is already booked. Please choose a different time.');
+      return;
+    }
       // Create an appointment object with a UUID
       const appointment = {
         appointmentId: cds.UUID,  // Generate a new UUID
