@@ -5,13 +5,13 @@ module.exports = async (srv) => {
 
   // Utility function to validate required fields
   const validateFields = (fields, req) => {
-    for (const field of fields) {
-      if (!req.data[field]) {
-        req.error(400, `${field} is required and cannot be null`);
-      }
-    }
-  };
-
+  //   for (const field of fields) {
+  //     if (!req.data[field]) {
+  //       req.error(400, `${field} is required and cannot be null`);
+  //     }
+  //   }
+  // }; in case you want to validate all fields and they should be required
+  }
   // Handle patient registration
   srv.on('registerPatient', async (req) => {
     try {
