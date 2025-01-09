@@ -3,11 +3,24 @@ const cds = require('@sap/cds');
 module.exports = async (srv) => {
   const { Patients, Appointments } = srv.entities;
 
+  // Utility function to validate required fields
+  const validateFields = (fields, req) => {
+    for (const field of fields) {
+      if (!req.data[field]) {
+        req.error(400, `${field} is required and cannot be null`);
+      }
+    }
+  };
+
   // Handle patient registration
   srv.on('registerPatient', async (req) => {
     try {
+      // Fields that should not be null or undefined
+      const requiredFields = ['firstName', 'lastName', 'dateOfBirth', 'gender', 'email', 'phone', 'address'];
+      validateFields(requiredFields, req);
+
       const { firstName, lastName, dateOfBirth, gender, email, phone, address } = req.data;
-      
+
       // Create a patient object with a UUID
       const patient = {
         patientId: cds.UUID,  // Generate a new UUID
@@ -37,6 +50,10 @@ module.exports = async (srv) => {
   // Handle appointment booking
   srv.on('bookAppointment', async (req) => {
     try {
+      // Fields that should not be null or undefined
+      const requiredFields = ['patientId', 'dateTime', 'reason'];
+      validateFields(requiredFields, req);
+
       const { patientId, dateTime, reason } = req.data;
 
       // Create an appointment object with a UUID
@@ -65,6 +82,10 @@ module.exports = async (srv) => {
   // Handle updating appointment status
   srv.on('updateAppointmentStatus', async (req) => {
     try {
+      // Fields that should not be null or undefined
+      const requiredFields = ['appointmentId', 'status'];
+      validateFields(requiredFields, req);
+
       const { appointmentId, status } = req.data;
 
       // Validate the status
