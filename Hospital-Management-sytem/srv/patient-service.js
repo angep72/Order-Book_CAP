@@ -25,6 +25,11 @@ module.exports = async (srv) => {
       // validateFields(requiredFields, req);
 
       const { firstName, lastName, dateOfBirth, gender, email, phone, address } = req.data;
+      const existingEmail = await cds.transaction(req).run(SELECT.one.from(Patients).where({email}))
+      if(existingEmail){
+        req.error(400, 'Email already exists. Please choose a different one.');
+        return;
+      }
 
       // Create a patient object with a UUID
       const patient = {

@@ -1,8 +1,9 @@
 namespace hospital;
 
+
 entity Patients {
   key patientId : UUID;
-   @assert.unique firstName    : String;
+  firstName    : String;
   lastName     : String;
   dateOfBirth  : Date;
   gender      : String;
@@ -11,6 +12,7 @@ entity Patients {
   address     : String;
   appointments: Association to many Appointments on appointments.patient = $self;
 }
+
 entity Appointments {
   key appointmentId : UUID;
   patient         : Association to Patients;
