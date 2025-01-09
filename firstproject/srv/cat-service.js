@@ -120,7 +120,6 @@ module.exports = cds.service.impl(async function() {
     
     //     const tx = cds.transaction(req)
 
-    //     // Fetch the order from the database
     //     const order = await tx.read(Orders).where({ ID: order_ID })
 
     //     // Validate order existence
