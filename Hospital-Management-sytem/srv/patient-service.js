@@ -41,7 +41,7 @@ module.exports = async (srv) => {
 
       // Create an appointment object with a UUID
       const appointment = {
-        appointmentId: cds.UUID(),  // Generate a new UUID
+        appointmentId: cds.UUID,  // Generate a new UUID
         patient_patientId: patientId,
         dateTime,
         reason,
