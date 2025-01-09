@@ -11,13 +11,17 @@ module.exports = async (srv) => {
   //     }
   //   }
   // }; in case you want to validate all fields and they should be required
-  
+  const validateFields=(req)=>{
+    if(!req.data.firstName){
+      req.error(400, 'First Name is required and cannot be null');
+    }
+  }
   // Handle patient registration
   srv.on('registerPatient', async (req) => {
     try {
       // Fields that should not be null or undefined
-      const requiredFields = ['firstName', 'lastName', 'dateOfBirth', 'gender', 'email', 'phone', 'address'];
-      validateFields(requiredFields, req);
+      // const requiredFields = ['firstName', 'lastName', 'dateOfBirth', 'gender', 'email', 'phone', 'address']; //this is for all fields
+      // validateFields(requiredFields, req);
 
       const { firstName, lastName, dateOfBirth, gender, email, phone, address } = req.data;
 
