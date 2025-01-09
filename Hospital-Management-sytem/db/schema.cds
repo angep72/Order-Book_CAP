@@ -1,6 +1,5 @@
 namespace hospital;
 
-
 entity Patients {
   key patientId : UUID;
   firstName    : String;
@@ -12,7 +11,6 @@ entity Patients {
   address     : String;
   appointments: Association to many Appointments on appointments.patient = $self;
 }
-
 entity Appointments {
   key appointmentId : UUID;
   patient         : Association to Patients;
