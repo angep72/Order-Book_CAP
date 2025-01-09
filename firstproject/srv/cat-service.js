@@ -21,7 +21,6 @@ module.exports = cds.service.impl(async function() {
         const currentStock = product[0].stock
         const newStock = currentStock - quantity
 
-        // Create a new order with a generated orderID
         const orderID = `ORD-${Math.floor(Math.random() * 1000)}`
 
         try {
