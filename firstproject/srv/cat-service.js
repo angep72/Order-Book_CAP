@@ -14,7 +14,6 @@ module.exports = cds.service.impl(async function() {
             return req.error(404, `Product ${product_ID} not found`)
         }
 
-        // Check stock availability
         if (product[0].stock < quantity) {
             return req.error(400, `Insufficient stock for product ${product_ID}`)
         }
