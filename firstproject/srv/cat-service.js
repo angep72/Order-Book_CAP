@@ -125,7 +125,6 @@ module.exports = cds.service.impl(async function() {
     //         return req.error(404, `Order ${order_ID} not found`)
     //     }
 
-    //     // Check order status
     //     if (order[0].status !== 'Created') {
     //         return req.error(400, `Order ${order_ID} cannot be cancelled`)
     //     }
