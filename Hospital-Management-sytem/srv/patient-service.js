@@ -1,6 +1,4 @@
 const cds = require('@sap/cds');
-const { UUID } = require('@sap/cds/common');
-
 module.exports = async (srv) => {
   const { Patients, Appointments } = srv.entities;
 
