@@ -69,7 +69,7 @@ module.exports = cds.service.impl(async function() {
         const { orderID } = req.data; // Get the orderID from the request data
 
         const tx = cds.transaction(req); // Start the transaction
-
+        //Handling the validation error
         try {
             // Fetch the order from the database (based on orderID)
             const order = await tx.read(Orders).where({ ID: orderID });
