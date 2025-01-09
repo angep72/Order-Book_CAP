@@ -1,3 +1,6 @@
+namespace hospital;
+
+
 entity Patients {
   key patientId : UUID;
   firstName    : String;
