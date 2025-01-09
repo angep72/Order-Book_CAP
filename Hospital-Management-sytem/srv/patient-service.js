@@ -19,6 +19,7 @@ module.exports = async (srv) => {
   // Handle patient registration
   srv.on('registerPatient', async (req) => {
     try {
+      validateFields(req)
       // Fields that should not be null or undefined
       // const requiredFields = ['firstName', 'lastName', 'dateOfBirth', 'gender', 'email', 'phone', 'address']; //this is for all fields
       // validateFields(requiredFields, req);

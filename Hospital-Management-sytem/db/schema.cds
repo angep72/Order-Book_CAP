@@ -2,7 +2,7 @@ namespace hospital;
 
 entity Patients {
   key patientId : UUID;
-  firstName    : String;
+   @assert.unique firstName    : String;
   lastName     : String;
   dateOfBirth  : Date;
   gender      : String;
