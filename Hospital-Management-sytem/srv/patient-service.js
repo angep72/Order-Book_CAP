@@ -60,7 +60,7 @@ module.exports = async (srv) => {
   // Handle appointment booking
   srv.on('bookAppointment', async (req) => {
     try {
-      // Fields that should not be null or undefined
+      // Fields that should not be null or undefined..
 
       const { patientId, dateTime, reason } = req.data;
       const bookedTime = await cds.transaction(req).run(SELECT.one.from(Appointments).where({dateTime}))
