@@ -77,7 +77,7 @@ module.exports = async (srv) => {
         status: 'PENDING'
       };
 
-      // Insert the new appointment into the database
+      // Insert the new appointment into the database..
       await cds.transaction(req).run(
         INSERT.into(Appointments).entries(appointment)
       );
