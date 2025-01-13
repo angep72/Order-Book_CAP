@@ -94,10 +94,6 @@ module.exports = async (srv) => {
   // Handle updating appointment status
   srv.on('updateAppointmentStatus', async (req) => {
     try {
-      // Fields that should not be null or undefined
-      // const requiredFields = ['appointmentId', 'status'];
-      // validateFields(requiredFields, req);
-
       const { appointmentId, status } = req.data;
 
       // Validate the status
