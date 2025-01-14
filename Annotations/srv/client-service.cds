@@ -1,11 +1,12 @@
-// srv/appointment-service.cds
 using appointment.db as db from '../db/schema';
 
-@path: 'service/appointment'
-service AppointmentService {
-    @readonly entity Doctors as projection on db.Doctors;
+@path: 'service/client'
+@requires: 'authenticated-user'
+service ClientService {
+    @readonly entity Doctors as projection on db.Doctors
+        where available = true;
     
-    @insertonly entity Appointments as projection on db.Appointments;
+    entity Appointments as projection on db.Appointments;
     
     entity Patients @(restrict: [
         { grant: ['READ', 'CREATE'], to: 'authenticated-user' }

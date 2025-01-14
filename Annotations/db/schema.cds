@@ -1,4 +1,3 @@
-// db/schema.cds
 namespace appointment.db;
 
 using { managed, cuid } from '@sap/cds/common';
@@ -15,6 +14,8 @@ entity Doctors : cuid, managed {
     firstName    : String(50);
     lastName     : String(50);
     speciality   : String(100);
+    email        : String(100);
+    available    : Boolean default true;
     appointments : Composition of many Appointments on appointments.doctor = $self;
 }
 
