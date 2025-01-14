@@ -5,6 +5,9 @@ module.exports = cds.service.impl(async function() {
     
     this.before('CREATE', 'Doctors', async (req) => {
         const { email } = req.data
+        if (!email) {
+            req.error(400, 'Email is required')
+        }
         
         // Check for duplicate email
         const exists = await SELECT.from(Doctors).where({ email })
