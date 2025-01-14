@@ -17,11 +17,25 @@
     "start": "cds-serve"
   },
   "requires": {
-      "db": {
-        "kind": "sqlite",
-        "credentials": {
-          "url": "db.sqlite"
+    "db": {
+        "kind": "sqlite"
+    },
+    "auth": {
+        "[production]": {
+            "kind": "xsuaa"
+        },
+        "[development]": {
+            "kind": "mock",
+            "users": {
+                "admin": {
+                    "password": "admin",
+                    "roles": ["admin"]
+                },
+                "client": {
+                    "password": "client",
+                    "roles": ["authenticated-user"]
+                }
+            }
         }
-      }
     }
-}
+  }}
