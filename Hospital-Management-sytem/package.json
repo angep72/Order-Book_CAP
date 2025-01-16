@@ -10,11 +10,15 @@
     "@sap/hana-client": "^2.23.24",
     "express": "^4",
     "nodemailer": "^6.9.16",
-    "uuid": "^11.0.4"
+    "uuid": "^11.0.4",
+    "@sap/xssec": "^3.x",
+    "passport": "^0.x"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.8.0",
-    "@cap-js/sqlite": "^1"
+    "@cap-js/sqlite": "^1",
+    "@sap/hdi-deploy": "^4.x",
+    "mbt": "^1.x"
   },
   "scripts": {
     "start": "cds-serve"
