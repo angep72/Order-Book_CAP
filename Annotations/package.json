@@ -11,7 +11,12 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
-    "@cap-js/cds-types": "^0.8.0"
+    "@cap-js/cds-types": "^0.8.0",
+    "@sap/cds": "^6",
+    "@sap/hana-client": "^2",
+    "express": "^4",
+    "@sap/xssec": "^3",
+    "passport": "^0"
   },
   "scripts": {
     "start": "cds-serve"
@@ -20,6 +25,11 @@
     "db": {
         "kind": "sqlite"
     },
+    "scripts": {
+      "build": "npx -p @sap/cds-dk cds build --production",
+      "deploy": "cf deploy mta_archives/Annotations_.0.0.mtar"
+    },
+  
     "auth": {
         "[production]": {
             "kind": "xsuaa"
