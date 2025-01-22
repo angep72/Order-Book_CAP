@@ -1,0 +1,53 @@
+_schema-version: 3.3.0
+ID: Sap-Fiori-cap-auth
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+modules:
+  - name: Sap-Fiori-cap-auth-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      readiness-health-check-type: http
+      readiness-health-check-http-endpoint: /health
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: Sap-Fiori-cap-auth-db
+      - name: Sap-Fiori-cap-auth-auth
+
+  - name: Sap-Fiori-cap-auth-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: Sap-Fiori-cap-auth-db
+
+resources:
+  - name: Sap-Fiori-cap-auth-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: Sap-Fiori-cap-auth-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: Sap-Fiori-cap-auth-${org}-${space}
+        tenant-mode: dedicated
