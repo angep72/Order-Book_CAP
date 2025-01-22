@@ -1,0 +1,4 @@
+ID,firstName,lastName,specialization,licenseNumber,email,phoneNumber,department_ID
+f1aa1e3a-b1c4-4739-8e9c-85f6c0f2932a,John,Smith,Cardiologist,DOC001,john.smith@hospital.com,+1234567890,d1cc0e3a-f1c4-4739-8e9c-85f6c0f2932a
+f2bb2e4b-c2d5-483a-9f7d-8e7f1c3043bb,Sarah,Johnson,Neurologist,DOC002,sarah.johnson@hospital.com,+1234567891,d2bb1a4b-e2d5-483a-9f7d-8e7f1c3043bb
+f3cc3e5c-d3e6-493b-ae8e-9f8e2d4154cc,Michael,Brown,Pediatrician,DOC003,michael.brown@hospital.com,+1234567892,d3aa2b5c-d3e6-493b-ae8e-9f8e2d4154cc

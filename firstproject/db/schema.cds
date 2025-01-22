@@ -12,7 +12,14 @@ entity Products {
       supplier    : String;@mandatory
       rating      : Decimal;@mandatory
       createdAt   : Timestamp;
+      
 }
+
+entity Users {
+        key ID: Integer;
+        username: String;
+        password: String;
+    }
 
 entity Orders {
   key ID          : String;@mandatory

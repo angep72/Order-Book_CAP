@@ -1,10 +1,8 @@
 using { hospital } from '../db/schema';
 
 service PatientManagementService {
-  @requires:'Admin'
-  @restrict:[{grant:'READ'}]
+  
   entity Patients as projection on hospital.Patients;
-  @requires:'authenticated-user'
   entity Appointments as projection on hospital.Appointments;
 
   action registerPatient(

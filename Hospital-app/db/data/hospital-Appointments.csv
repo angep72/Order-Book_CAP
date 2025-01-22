@@ -1,0 +1,5 @@
+
+ID,patient_ID,doctor_ID,dateTime,status,type,symptoms
+a1gg1e3a-f1c4-4739-8e9c-85f6c0f2932a,p1dd1e3a-f1c4-4739-8e9c-85f6c0f2932a,f1aa1e3a-b1c4-4739-8e9c-85f6c0f2932a,2024-01-22T10:00:00Z,scheduled,regular,Chest pain and shortness of breath
+a2hh2e4b-c2d5-483a-9f7d-8e7f1c3043bb,p2ee2e4b-c2d5-483a-9f7d-8e7f1c3043bb,f2bb2e4b-c2d5-483a-9f7d-8e7f1c3043bb,2024-01-22T11:00:00Z,confirmed,followup,Regular checkup after treatment
+a3ii3e5c-d3e6-493b-ae8e-9f8e2d4154cc,p3ff3e5c-d3e6-493b-ae8e-9f8e2d4154cc,f3cc3e5c-d3e6-493b-ae8e-9f8e2d4154cc,2024-01-22T14:00:00Z,scheduled,emergency,High fever and severe cough
