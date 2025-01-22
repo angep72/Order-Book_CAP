@@ -11,3 +11,10 @@ entity Risks:managed{
     criticality:Integer;
 
 }
+entity Mitigations:managed{
+    key ID: UUID; @(Core.Computed: true)
+    description: String;
+    owner: String;
+    timeline: String;
+    risks:Association to Risks on risks.miti
+}
