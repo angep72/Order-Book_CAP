@@ -6,9 +6,10 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@cap-js/hana": "^1",
     "@sap/cds": "^8",
-    "express": "^4",
-    "@sap/xssec": "^4"
+    "@sap/xssec": "^4.2.8",
+    "express": "^4"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.8.0",
@@ -20,9 +21,21 @@
   },
   "cds": {
     "requires": {
-      "[production]": {
-        "auth": "xsuaa"
+      "uaa": {
+        "kind": "xsuaa"
+      },
+      "db": {
+        "kind": "sql",
+        "credentials": {
+          "database": "BooksAUthDb"
+        }
       }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    },
+    "sql": {
+      "native_hana_associations": false
     }
   }
 }
