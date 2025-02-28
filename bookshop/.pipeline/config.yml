@@ -1,5 +1,5 @@
 # .pipeline/config.yml
 steps:
   mtaBuild:
-    applicationName: 'bookshop-srv'  # Add this line with your application name
+    applicationName: 'bookshop'  # Add this line with your application name
     buildTarget: 'CF'
